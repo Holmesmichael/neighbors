@@ -1,0 +1,27 @@
+@import "bootstrap";
+
+.home-landing {
+   //  margin-top: 50px;
+
+    .jumbotron {
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+.landing {
+   margin-top: 20px;
+
+   .jumbotron {
+       justify-content: center;
+       text-align: center;
+   }
+
+   #logo {
+       opacity: 0.9;
+   }
+}
+
+.login {
+   margin-top: 50px;
+}
