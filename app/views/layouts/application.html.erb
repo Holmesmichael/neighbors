@@ -9,7 +9,11 @@
   </head>
 
   <body>
-    <%= react_component "Navigation" %> 
+    <% if user_signed_in? %>
+      <%= react_component "Signedin" %> 
+    <% else %>
+      <%= react_component "Navigation" %> 
+    <% end %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
