@@ -15,8 +15,8 @@ var Navigation = React.createClass({
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             <a className="nav-item nav-link active" href="/"><h6>Home</h6></a>
-                            <a className="nav-item nav-link" href="/login"><h6>Sign In</h6></a>
-                            <a className="nav-item nav-link" href="/users/new"><h6>Sign Up</h6></a>
+                            <a className="nav-item nav-link" href="#"><h6>Sign In</h6></a>
+                            <a className="nav-item nav-link" href="#"><h6>Sign Up</h6></a>
                         </div>
                     </div>
             </div>
