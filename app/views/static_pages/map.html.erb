@@ -5,14 +5,13 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
+      
       #map {
-        height: 800px;
-        width: 800px;
-        border-radius: 50%;
+        height: 100%;
+        width: 100% ;
+        border-radius: 5px;
       }
-      /* Optional: Makes the sample page fill the window. */
+  
       html, body {
         height: 100%;
         margin: 0;
@@ -21,13 +20,23 @@
     </style>
   </head>
   <body>
-    <div id="map"></div>
-    <script>
-      // Note: This example requires that you consent to location sharing when
-      // prompted by your browser. If you see the error "The Geolocation service
-      // failed.", it means you probably did not give permission for the browser to
-      // locate you.
-      var map, infoWindow;
+  
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <%= react_component "Landing" %> 
+    </div>
+    <div class="col-sm" style="min-width:250px;min-height:250px;">
+     
+        <div id="map"></div>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+
+  var map, infoWindow;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
@@ -35,7 +44,7 @@
         });
         infoWindow = new google.maps.InfoWindow;
 
-        // Try HTML5 geolocation.
+       
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
             var pos = {
@@ -51,9 +60,39 @@
             handleLocationError(true, infoWindow, map.getCenter());
           });
         } else {
-          // Browser doesn't support Geolocation
+          
           handleLocationError(false, infoWindow, map.getCenter());
         }
+
+        // $.getJSON("/riders.json", function ( data )  {
+
+        //         $.each(data, function(key, data) {
+
+        //             var latLng = new google.maps.LatLng( data.latitude , data.longitude );
+
+              
+        //             var infowindow = new google.maps.InfoWindow ({
+        //             })
+
+
+        //             var marker = new google.maps.Marker({
+        //                 position: latLng,
+        //                 map: map,
+        //                 title: (data.first_name + ' ' +data.last_name)
+                        
+        //             });
+
+
+        //           google.maps.event.addListener (marker, 'click', function() {
+        //           infowindow.setContent( data.first_name +' '+ data.last_name +': '+ data.city +', '+ data.state );
+        //           infowindow.open(map, marker);
+        //           setTimeout(function () { infowindow.close(); }, 5000);
+
+        //         });
+                
+
+        //       });
+
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -63,9 +102,13 @@
                               'Error: Your browser doesn\'t support geolocation.');
         infoWindow.open(map);
       }
+
+    
     </script>
+    
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChx_EFBxgGh_So_8fXbs6xYbW3HVpWUR0&callback=initMap">
-    </script>
+    </script> 
+    
   </body>
 </html>
