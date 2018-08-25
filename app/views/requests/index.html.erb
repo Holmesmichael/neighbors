@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      
+    </div>
+    
+    <div class="col-sm-6" >
+      <h1>Current list of requests</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Request</th>
+          
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <% @requests.each do |request| %>
+          
+            <tr>
+              <td><%= request.title %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-3">
+      
+    </div>
+  </div>
+</div>

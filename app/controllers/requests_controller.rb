@@ -1,22 +1,36 @@
 class RequestsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :set_request, only: [:show, :edit, :update, :destroy]
+    respond_to? :json
 
     def index
-        requests = Request.all
-        render json: {requests: requests}
+        @requests = Request.all
+        respond_to do |format|
+            format.html { render(:text => "not implemented") }
+            format.json { render json: @request }
+        end
+    end
+
+    def new
+        @request = Request.new
     end
 
     def create
-        request = Request.new(request_params)
-        request.user = current_user
-        if request.save
-           render json:{
-               message: "Your request was saved!",
-               request: request,
-        }else
+        @request = Request.new(request_params)
+        @request.user = current_user
+       
+        respond_to do |format|
+            if @request.save
+              format.html { redirect_to @request, notice: 'Request was successfully created.' }
+              format.json { render :show, status: :created, location: @request }
+            else
+              format.html { render :new }
+              format.json { render json: @request.errors, status: :unprocessable_entity }
+            end
+          end
 
-         render json: {message: "Sorry, something is wrong here..."}
-        end
+    end
+
+    def edit
     end
 
     def show 
@@ -25,10 +39,19 @@ class RequestsController < ApplicationController
     end
 
     def update
+        respond_to do |format|
+            if @request.update(request_params)
+              format.html { redirect_to @request, notice: 'Request was successfully updated.' }
+              format.json { render :show, status: :ok, location: @request }
+            else
+              format.html { render :edit }
+              format.json { render json: @request.errors, status: :unprocessable_entity }
+            end
+          end
     end
 
     def destroy 
-        if current_user @request.user
+        if current_user = @request.user
             if @request.destroy
                 json_response "Your request was deleted", true, {request: @request}, :ok
             else
@@ -43,6 +66,10 @@ class RequestsController < ApplicationController
 
     def request_params
         params.require(:request).permit(:title, :description, :address, :request_type)
+    end
+
+    def set_request
+        @request = Request.find(params[:id])
     end
     
 end
