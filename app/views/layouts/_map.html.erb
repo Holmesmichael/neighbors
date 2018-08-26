@@ -7,13 +7,14 @@
     <style>
       
       #map {
-        height: 100%;
-        width: 100% ;
+        height: 600px;
+        width: 600px ;
         border-radius: 5px;
       }
   
       html, body {
         height: 100%;
+        width: 100%;
         margin: 0;
         padding: 0;
       }
@@ -24,12 +25,9 @@
   <div class="container">
   <div class="row">
     <div class="col-sm">
-      <%= react_component "Landing" %> 
-     
-      <button type="button" class="btn btn-primary"><%= link_to 'New Request', new_request_path %></button>
       
     </div>
-    <div class="col-sm" style="min-width:250px;min-height:250px;">
+    <div class="col-sm" >
      
         <div id="map"></div>
       
@@ -71,7 +69,7 @@
 
         //         $.each(data, function(key, data) {
 
-        //             var latLng = new google.maps.LatLng( data.latitude , data.longitude );
+        //             var latLng = new google.maps.LatLng( data.lat , data.lng );
 
               
         //             var infowindow = new google.maps.InfoWindow ({
@@ -81,7 +79,7 @@
         //             var marker = new google.maps.Marker({
         //                 position: latLng,
         //                 map: map,
-        //                 title: (data.first_name + ' ' +data.last_name)
+        //                 title: (data.title + ' ' +data.request_type)
                         
         //             });
 

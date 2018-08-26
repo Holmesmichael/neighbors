@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
     before_action :set_request, only: [:show, :edit, :update, :destroy]
     respond_to? :json
+    
 
     def index
         @requests = Request.all
@@ -24,7 +25,8 @@ class RequestsController < ApplicationController
               format.json { render :show, status: :created, location: @request }
             else
               format.html { render :new }
-              format.json { render json: @request.errors, status: :unprocessable_entity }
+              format.json { render json: @request.errors.full_messages, status: :unprocessable_entity }
+              
             end
           end
 
@@ -65,7 +67,7 @@ class RequestsController < ApplicationController
     private
 
     def request_params
-        params.require(:request).permit(:title, :description, :address, :request_type)
+        params.require(:request).permit(:title, :description, :request_type, :lat, :lng)
     end
 
     def set_request

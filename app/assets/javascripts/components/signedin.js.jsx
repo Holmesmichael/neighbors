@@ -14,7 +14,7 @@ var Signedin = React.createClass({
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav">
                             <a className="nav-item nav-link" href="/users/edit"><h6>Profile</h6></a>
-                            <a className="nav-item nav-link" href="/static_pages/map"><h6>Map</h6></a>
+                            <a className="nav-item nav-link" href="/requests"><h6>Map</h6></a>
                             <a className="nav-item nav-link" href="#"><h6>Logout</h6></a>  
                         </div>
                     </div>

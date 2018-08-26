@@ -1,1 +1,1 @@
-json.partial! "requests/requets", request: @request
+json.partial! "requests/requests", request: @request

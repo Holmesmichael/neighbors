@@ -6,12 +6,11 @@
       <%= f.input :description, required: true, autofocus: true %>
       <%= f.input :lat, required: true, autofocus: true %>
       <%= f.input :lng, required: true, autofocus: true %>
-      <%= f.input :user_id, required: true, autofocus: true %>
       <%= f.select :request_type, options_for_select(%w[Request Help]) %>
      
     </div>
   
     <div class="form-actions">
-      <%= f.button :submit, "Sign up" %>
+      <%= f.button :submit, "Get help!" %>
     </div>
   <% end %>

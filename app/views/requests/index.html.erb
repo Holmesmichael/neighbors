@@ -1,13 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-3">
-      
-    </div>
-    
-    <div class="col-sm-6" >
-      <h1>Current list of requests</h1>
+  <div class="row" id="help-main" style="margin-top:50px;">
+
+    <div class="col-sm-4">
+      <h1>Help Needed!</h1>
 
       <table>
         <thead>
@@ -23,12 +20,16 @@
           
             <tr>
               <td><%= request.title %></td>
+              <td><%= request.request_type %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
+      <button type="button" class="btn btn-primary"><%= link_to 'New Request', new_request_path %></button>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-8">
+
+    <%= render ("layouts/map") %>
       
     </div>
   </div>
