@@ -3,12 +3,18 @@ class RequestsController < ApplicationController
     respond_to? :json
     
 
+#GET /riders.json (showing null)
     def index
         @requests = Request.all
         respond_to do |format|
-            format.html { render(:text => "not implemented") }
-            format.json { render json: @request }
+            format.html 
+            format.json { render json: @requests }
         end
+    end
+
+    def show 
+        # request = Request.find(params[:id])
+        # render json: {request:request}
     end
 
     def new
@@ -25,7 +31,7 @@ class RequestsController < ApplicationController
               format.json { render :show, status: :created, location: @request }
             else
               format.html { render :new }
-              format.json { render json: @request.errors.full_messages, status: :unprocessable_entity }
+              format.json { render json: @request.errors, status: :unprocessable_entity }
               
             end
           end
@@ -35,10 +41,7 @@ class RequestsController < ApplicationController
     def edit
     end
 
-    def show 
-        request = Request.find(params[:id])
-        render json: {request:request}
-    end
+   
 
     def update
         respond_to do |format|
@@ -67,7 +70,7 @@ class RequestsController < ApplicationController
     private
 
     def request_params
-        params.require(:request).permit(:title, :description, :request_type, :lat, :lng)
+        params.require(:request).permit(:title, :description, :request_type, :address)
     end
 
     def set_request

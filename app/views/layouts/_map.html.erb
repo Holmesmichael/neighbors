@@ -39,11 +39,14 @@
 
   var map, infoWindow;
       function initMap() {
+        
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: -34.397, lng: 150.644},
           zoom: 14
         });
         infoWindow = new google.maps.InfoWindow;
+
+        
 
        
         if (navigator.geolocation) {
@@ -53,48 +56,64 @@
               lng: position.coords.longitude
             };
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Current location.');
-            infoWindow.open(map);
+            
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
+
+
+          
+
+          $.getJSON("/requests.json", function ( data )  {
+
+            $.each(data, function(key, data) {
+
+                var latLng = new google.maps.LatLng( data.latitude , data.longitude );
+
+         
+                var infowindow = new google.maps.InfoWindow ({
+               })
+
+               
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    animation: google.maps.Animation.BOUNCE,
+                    title: (data.title + ' ' +data.request_type)
+                   
+                });
+
+                if (data.request_type == 'Request') {
+                  marker.setIcon('https://png.icons8.com/ios/1x/trust-filled.png');
+                 }
+                 else{
+                  marker.setIcon('https://png.icons8.com/ios/1x/trust.png');
+                 }
+
+
+              google.maps.event.addListener (marker, 'click', function() {
+              infowindow.setContent( data.title );
+              infowindow.open(map, marker);
+              setTimeout(function () { infowindow.close(); }, 5000);
+
+            });
+           
+
+          });
+          });
+
+ 
         } else {
           
           handleLocationError(false, infoWindow, map.getCenter());
-        }
+        };
 
-        // $.getJSON("/riders.json", function ( data )  {
-
-        //         $.each(data, function(key, data) {
-
-        //             var latLng = new google.maps.LatLng( data.lat , data.lng );
-
-              
-        //             var infowindow = new google.maps.InfoWindow ({
-        //             })
+        
 
 
-        //             var marker = new google.maps.Marker({
-        //                 position: latLng,
-        //                 map: map,
-        //                 title: (data.title + ' ' +data.request_type)
-                        
-        //             });
-
-
-        //           google.maps.event.addListener (marker, 'click', function() {
-        //           infowindow.setContent( data.first_name +' '+ data.last_name +': '+ data.city +', '+ data.state );
-        //           infowindow.open(map, marker);
-        //           setTimeout(function () { infowindow.close(); }, 5000);
-
-        //         });
-                
-
-        //       });
-
-      }
+ }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         infoWindow.setPosition(pos);

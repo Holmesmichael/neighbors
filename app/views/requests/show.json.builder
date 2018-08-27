@@ -1,1 +1,0 @@
-json.partial! "requests/requests", request: @request

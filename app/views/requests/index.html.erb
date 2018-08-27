@@ -20,7 +20,7 @@
           
             <tr>
               <td><%= request.title %></td>
-              <td><%= request.request_type %></td>
+              <td><button type="button" class="btn btn-primary"><%= link_to request.title, request %></button></td>
             </tr>
           <% end %>
         </tbody>

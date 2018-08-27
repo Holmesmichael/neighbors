@@ -1,9 +1,24 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Request title:</strong>
+  <strong> title:</strong>
   <%= @request.title %>
 </p>
+<p>
+  <strong> description:</strong>
+  <%= @request.description %>
+</p>
+<p>
+  <strong> address:</strong>
+  <%= @request.address %>
+</p>
+<p>
+  <strong> request_type:</strong>
+  <%= @request.request_type %>
+</p>
+
+<button type="button" class="btn btn-primary"><%= link_to 'Volunteer', converstations_path %></button>
+
 
 
 
