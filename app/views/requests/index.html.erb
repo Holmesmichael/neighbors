@@ -20,7 +20,19 @@
           
             <tr>
               <td><%= request.title %></td>
-              <td><button type="button" class="btn btn-primary"><%= link_to request.title, request %></button></td>
+              <td><%= request.address %></td>
+              
+              <td><button type="button" class="btn btn-primary"><%= link_to 'Volunteer', conversations_path  %></button></td>
+
+              <script>
+                  var count = 0;
+                    $(document).click(function(){
+                        count += 1;
+                        if (count  > 5) {
+                            request.title(null);
+                        }
+                  });
+              </script>
             </tr>
           <% end %>
         </tbody>

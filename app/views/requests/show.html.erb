@@ -1,24 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong> title:</strong>
+  <strong> Title:</strong>
   <%= @request.title %>
 </p>
 <p>
-  <strong> description:</strong>
+  <strong> Description:</strong>
   <%= @request.description %>
 </p>
 <p>
-  <strong> address:</strong>
+  <strong> Address:</strong>
   <%= @request.address %>
 </p>
 <p>
-  <strong> request_type:</strong>
+  <strong> Type:</strong>
   <%= @request.request_type %>
 </p>
 
-<button type="button" class="btn btn-primary"><%= link_to 'Volunteer', converstations_path %></button>
+<button type="button" class="btn btn-primary"><%= link_to 'Volunteer', conversation_messages_path(@conversation) %></button>
 
+# <script>
+
+# <p>if this is clicked 5 times, the request needs to count up...until greater than 5 makes it disabled </p> 
+
+# </script>
+
+<br/>
+<br/>
 
 
 

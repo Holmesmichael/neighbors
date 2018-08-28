@@ -7,6 +7,8 @@ class User < ApplicationRecord
   # has_attached_file :id, styles: { medium: "300x300", thumb: "100x100" }
 
   has_many :requests
+  has_many :conversations
+  has_many :messages
 
 
 

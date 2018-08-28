@@ -80,25 +80,27 @@
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map,
-                    animation: google.maps.Animation.BOUNCE,
+                    animation: google.maps.Animation.DROP,
                     title: (data.title + ' ' +data.request_type)
-                   
+                 
                 });
 
+
                 if (data.request_type == 'Request') {
-                  marker.setIcon('https://png.icons8.com/ios/1x/trust-filled.png');
+                  marker.setIcon('https://png.icons8.com/ultraviolet/1x/good-quality.png');
                  }
                  else{
-                  marker.setIcon('https://png.icons8.com/ios/1x/trust.png');
+                  marker.setIcon('https://png.icons8.com/color/1x/good-quality.png');
                  }
 
 
               google.maps.event.addListener (marker, 'click', function() {
-              infowindow.setContent( data.title );
+              infowindow.setContent( data.title + ': ' + data.description );
               infowindow.open(map, marker);
               setTimeout(function () { infowindow.close(); }, 5000);
 
             });
+         
            
 
           });
