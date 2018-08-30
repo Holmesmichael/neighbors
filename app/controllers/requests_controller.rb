@@ -1,7 +1,12 @@
 class RequestsController < ApplicationController
     before_action :set_request, only: [:show, :edit, :update, :destroy]
     respond_to? :json
-    
+
+
+    def request_map
+        format.json { render :json => @requests.to_json(:only => [:id, :title, :description, :address, :request_type], :methods => [:to_param]) }
+    end
+
 
 #GET /riders.json (showing null)
     def index
@@ -76,5 +81,11 @@ class RequestsController < ApplicationController
     def set_request
         @request = Request.find(params[:id])
     end
-    
+
+  
+
+ 
 end
+
+    
+

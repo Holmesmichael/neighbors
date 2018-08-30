@@ -58,6 +58,10 @@
 
             
             map.setCenter(pos);
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Current location');
+            infoWindow.open(map);
+            map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindow, map.getCenter());
           });
@@ -84,6 +88,7 @@
                     title: (data.title + ' ' +data.request_type)
                  
                 });
+
 
 
                 if (data.request_type == 'Request') {

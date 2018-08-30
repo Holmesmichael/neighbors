@@ -6,42 +6,181 @@
     <div class="col-sm-4">
       <h1>Help Needed!</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Request</th>
-          
-          </tr>
-        </thead>
+     <h3>This symbol means request</h3> 
+      <%= image_tag( "https://png.icons8.com/ultraviolet/1x/good-quality.png", size: "40x40") -%>
+      <br/>
 
-        <tbody>
+      <h3>This symbol means helps</h3> 
+      <%= image_tag( "https://png.icons8.com/color/1x/good-quality.png", size: "50x50") -%>
 
-          <% @requests.each do |request| %>
-          
-            <tr>
-              <td><%= request.title %></td>
-              <td><%= request.address %></td>
-              
-              <td><button type="button" class="btn btn-primary"><%= link_to 'Volunteer', conversations_path  %></button></td>
-
-              <script>
-                  var count = 0;
-                    $(document).click(function(){
-                        count += 1;
-                        if (count  > 5) {
-                            request.title(null);
-                        }
-                  });
-              </script>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <input type ="submit" name="command" value="Check after helped"/>
+    
+      <br/>
+      <h3> Post request for a need </h3>
       <button type="button" class="btn btn-primary"><%= link_to 'New Request', new_request_path %></button>
+
+
     </div>
     <div class="col-sm-8">
 
-    <%= render ("layouts/map") %>
+    
+ 
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      
+      #map {
+        height: 600px;
+        width: 800px ;
+        border-radius: 5px;
+      }
+  
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  
+  <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      
+    </div>
+    <div class="col-sm" >
+     
+        <div id="map"></div>
+
+      
+      
+    </div>
+  </div>
+</div>
+
+<script>
+
+  var map, infoWindow;
+      function initMap() {
+        
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 14
+        });
+        infoWindow = new google.maps.InfoWindow;
+
+        
+
+       
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            
+            map.setCenter(pos);
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Current location');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+
+
+          
+
+          $.getJSON("/requests.json", function ( data )  {
+
+            $.each(data, function(key, data) {
+
+                var latLng = new google.maps.LatLng( data.latitude , data.longitude );
+
+         
+              
+               var infowindow = new google.maps.InfoWindow({
+                  content: '<a href="/requests/' + data.id + '">' + 'Click here to volunteer' + '</a><br/>' + 'Need:  ' + data.title + '<br/>' + 'Description:  ' + data.description + '<br/>' + ' Address:  ' + data.address + '<br/>' + 'Need type:  ' + data.request_type + '<br/>' + '<input type ="submit" name="command" value="Check after helped"/>'
+                });
+
+
+                var count=0;
+                $("input[type='submit']").click(function() {
+                  count=count+1;
+                    if(count==5){
+                             $(this).attr("hidden", true);
+                    }
+                    else
+                    {
+                         $(this).attr("hidden", false);
+                    }
+             
+                });
+
+
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    title: (data.title + ' ' +data.request_type)
+                 
+                });
+
+                
+                if (data.request_type == 'Request') {
+                  marker.setIcon('https://png.icons8.com/ultraviolet/1x/good-quality.png');
+                 }
+                 else{
+                  marker.setIcon('https://png.icons8.com/color/1x/good-quality.png');
+                 }
+
+
+
+          
+
+              google.maps.event.addListener (marker, 'click', function() {
+              
+              infowindow.open(map, marker);
+              setTimeout(function () { infowindow.close(); }, 7000);
+
+            });
+         
+           
+
+          });
+          });
+
+ 
+        } else {
+          
+          handleLocationError(false, infoWindow, map.getCenter());
+        };
+
+        
+
+
+ }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+
+    
+    </script>
+    
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChx_EFBxgGh_So_8fXbs6xYbW3HVpWUR0&callback=initMap">
+    </script> 
+    
+ 
+  
+
+ 
       
     </div>
   </div>
