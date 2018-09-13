@@ -4,7 +4,7 @@ class RequestsController < ApplicationController
 
 
     def request_map
-        format.json { render :json => @requests.to_json(:only => [:id, :title, :description, :address, :request_type], :methods => [:to_param]) }
+        format.json { render :json => @requests.to_json(:only => [:id, :title, :description, :address, :request_type, :done], :methods => [:to_param]) }
     end
 
 
@@ -20,6 +20,7 @@ class RequestsController < ApplicationController
     def show 
         # request = Request.find(params[:id])
         # render json: {request:request}
+       
     end
 
     def new
@@ -49,15 +50,16 @@ class RequestsController < ApplicationController
    
 
     def update
-        respond_to do |format|
-            if @request.update(request_params)
-              format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-              format.json { render :show, status: :ok, location: @request }
-            else
-              format.html { render :edit }
-              format.json { render json: @request.errors, status: :unprocessable_entity }
+        @request = Request.find(params[:id])
+            respond_to do |format|
+                if @request.update(done_params)
+                format.html { redirect_to @request, notice: 'Request was successfully updated.' }
+                format.json { render :show, status: :ok, location: @request }
+                else
+                format.html { render :edit }
+                format.json { render json: @request.errors, status: :unprocessable_entity }
+                end
             end
-          end
     end
 
     def destroy 
@@ -75,12 +77,17 @@ class RequestsController < ApplicationController
     private
 
     def request_params
-        params.require(:request).permit(:title, :description, :request_type, :address)
+        params.require(:request).permit(:title, :description, :request_type, :address, :done)
     end
 
     def set_request
         @request = Request.find(params[:id])
     end
+
+    def done_params
+        params.require(:request).permit(:done)
+    end
+
 
   
 

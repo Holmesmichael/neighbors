@@ -13,7 +13,6 @@
       <h3>This symbol means helps</h3> 
       <%= image_tag( "https://png.icons8.com/color/1x/good-quality.png", size: "50x50") -%>
 
-      <input type ="submit" name="command" value="Check after helped"/>
     
       <br/>
       <h3> Post request for a need </h3>
@@ -96,17 +95,20 @@
 
             $.each(data, function(key, data) {
 
-                var latLng = new google.maps.LatLng( data.latitude , data.longitude );
+               var latLng = new google.maps.LatLng( data.latitude , data.longitude );
 
-         
+               var latLng = (data.done > 5) ? "null" : new google.maps.LatLng( data.latitude , data.longitude );
+
               
                var infowindow = new google.maps.InfoWindow({
-                  content: '<a href="/requests/' + data.id + '">' + 'Click here to volunteer' + '</a><br/>' + 'Need:  ' + data.title + '<br/>' + 'Description:  ' + data.description + '<br/>' + ' Address:  ' + data.address + '<br/>' + 'Need type:  ' + data.request_type + '<br/>' + '<input type ="submit" name="command" value="Check after helped"/>'
+                  content: '<a href="/requests/' + data.id + '">' + 'Click here to volunteer' + '</a><br/>' + 'Need:  '
+                           + data.title + '<br/>' + 'Description:  ' + data.description + '<br/>' + ' Address:  ' + data.address +
+                           '<br/>' + 'Need type:  ' + data.request_type + '<br/>' 
                 });
 
 
                 var count=0;
-                $("input[type='submit']").click(function() {
+                $("input[type='checkbox']").click(function() {
                   count=count+1;
                     if(count==5){
                              $(this).attr("hidden", true);
@@ -137,7 +139,6 @@
 
 
 
-          
 
               google.maps.event.addListener (marker, 'click', function() {
               
@@ -150,6 +151,8 @@
 
           });
           });
+
+          
 
  
         } else {

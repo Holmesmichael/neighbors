@@ -16,12 +16,47 @@
   <strong> Type:</strong>
   <%= @request.request_type %>
 </p>
+<p>
+  <strong> Volunteers:</strong>
+  <%= @request.done %>
+</p>
+
+
+
+<%= simple_form_for @request do |f| %>
+
+<%= f.input :done, as: :select, label:"Are you helping?", collection: Request.done_values.map { |key, val| [key.humanize, val] } %>
+ 
+<%= f.button :submit %>
+
+<% end %>
+
+
+
+<br/>
+
+<br/>
 
 <h1> TESTING MESSAGING </h1>
 
 <%= link_to 'Message', conversations_path(@conversation) %> 
 
 <h1> ENDING </h1>
+
+<script>
+var count=0;
+$("input[type='checkbox']").click(function() {
+  count=count+1;
+    if(count==5){
+             $(this).attr("hidden", true);
+    }
+    else
+    {
+         $(this).attr("hidden", false);
+    }
+
+});
+</script>
 
 
 
