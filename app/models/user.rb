@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :requests
   has_many :conversations
   has_many :messages
+  has_many :volunteers
 
 
 

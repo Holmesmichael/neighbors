@@ -21,13 +21,19 @@
   <%= @request.done %>
 </p>
 
+<h2> To help please complete both steps</h2>
 
 
-<%= simple_form_for @request do |f| %>
+<h3> 1. Select if you can complete </h3>
 
-<%= f.input :done, as: :select, label:"Are you helping?", collection: Request.done_values.map { |key, val| [key.humanize, val] } %>
- 
+<%= simple_form_for @request, url: incr_done_request_path do |f| %>
+
+  <%= f.radio_button :done, 1 %>I am helping<br/><br/>
+  <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
+
 <%= f.button :submit %>
+
+
 
 <% end %>
 
@@ -37,26 +43,10 @@
 
 <br/>
 
-<h1> TESTING MESSAGING </h1>
+
+<h3> 2. Send message to organize help </h3>
 
 <%= link_to 'Message', conversations_path(@conversation) %> 
-
-<h1> ENDING </h1>
-
-<script>
-var count=0;
-$("input[type='checkbox']").click(function() {
-  count=count+1;
-    if(count==5){
-             $(this).attr("hidden", true);
-    }
-    else
-    {
-         $(this).attr("hidden", false);
-    }
-
-});
-</script>
 
 
 

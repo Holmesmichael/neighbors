@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :volunteers
   get 'messages/index'
 
   get 'conversations/index'
@@ -13,9 +14,9 @@ Rails.application.routes.draw do
     resources :messages, only: [:index, :create]
   end
   
-  resources :requests
-
-
+  resources :requests do
+    member { patch 'incr_done' }
+  end
 
 
 end

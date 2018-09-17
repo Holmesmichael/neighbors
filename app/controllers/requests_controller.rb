@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
     before_action :set_request, only: [:show, :edit, :update, :destroy]
     respond_to? :json
+    
 
 
     def request_map
@@ -51,6 +52,7 @@ class RequestsController < ApplicationController
 
     def update
         @request = Request.find(params[:id])
+        @request.increment! :done
             respond_to do |format|
                 if @request.update(done_params)
                 format.html { redirect_to @request, notice: 'Request was successfully updated.' }
@@ -73,6 +75,17 @@ class RequestsController < ApplicationController
             json_response "Sorry, you do not have permission to delete this request", false, {}, :unauthorized
         end
     end
+
+    def incr_done
+        @request = Request.find(params[:id])
+        count = params[:request] && params[:request][:done].to_i
+      
+        if count.in? [-1,1]
+          @request.update_attributes(done: @request.done + count)
+        end
+      
+        redirect_to @request 
+      end
 
     private
 
