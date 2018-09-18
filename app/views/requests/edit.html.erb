@@ -1,6 +1,8 @@
 <h1>Editing Request</h1>
 
-<%= render 'form', request: @request %>
+<%= form_with(model: @request, local: true) do |form| %>
+    <%= react_component 'RequestForm', { request: @request } %>
+<% end %>
 
 <%= link_to 'Show', @request %> |
 <%= link_to 'Back', requests_path %>

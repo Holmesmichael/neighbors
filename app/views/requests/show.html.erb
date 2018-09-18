@@ -13,40 +13,46 @@
   <%= @request.address %>
 </p>
 <p>
-  <strong> Type:</strong>
-  <%= @request.request_type %>
-</p>
-<p>
   <strong> Volunteers:</strong>
   <%= @request.done %>
 </p>
+      <% if current_user == @request.user %>
 
-<h2> To help please complete both steps</h2>
+      <%= simple_form_for @request, url: incr_done_request_path do |f| %>
+        <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
+        <%= f.button :submit %>
+      <% end %>
 
+      <% else %>
 
-<h3> 1. Select if you can complete </h3>
-
-<%= simple_form_for @request, url: incr_done_request_path do |f| %>
-
-  <%= f.radio_button :done, 1 %>I am helping<br/><br/>
-  <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
-
-<%= f.button :submit %>
+      <h2> To help please complete both steps</h2>
 
 
+      <h3> 1. Select if you can complete </h3>
 
-<% end %>
+      
+          <%= simple_form_for @request, url: incr_done_request_path do |f| %>
+
+            <%= f.radio_button :done, 1 %>I am helping<br/><br/>
+            <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
+
+          <%= f.button :submit %>
+
+          <% end %>
+
+          <h3> 2. Send message to organize help </h3>
+
+          <%= link_to 'Message', conversations_path(@conversation) %> 
+    
+    
+
+      <% end %>
 
 
 
-<br/>
+      <br/>
 
-<br/>
-
-
-<h3> 2. Send message to organize help </h3>
-
-<%= link_to 'Message', conversations_path(@conversation) %> 
+      <br/>
 
 
 
