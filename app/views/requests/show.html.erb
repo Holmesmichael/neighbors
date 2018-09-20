@@ -16,6 +16,10 @@
   <strong> Volunteers:</strong>
   <%= @request.done %>
 </p>
+<p>
+  <strong> By:</strong>
+<%= @request.user.first_name %>
+</p>
       <% if current_user == @request.user %>
 
       <%= simple_form_for @request, url: incr_done_request_path do |f| %>
@@ -43,7 +47,8 @@
           <h3> 2. Send message to organize help </h3>
 
           <%= link_to 'Message', conversations_path(@conversation) %> 
-    
+
+          <%= link_to "Volunteer", conversations_path(sender_id: current_user,recipient_id: @request.user.id), method: :post %>
     
 
       <% end %>
