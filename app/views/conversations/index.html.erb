@@ -3,20 +3,19 @@
  
 
   <% @conversations.each do |conversation| %>
-    <% if conversation.sender_id == current_user.id ||  conversation.recipient_id == current_user.id %>
-     <% if conversation.sender_id == current_user.id %>
-       <% recipient = Request.find(conversation.recipient_id) %>
-     <% else %>
-       <% recipient = Request.find(conversation.sender_id) %>
-     <% end %>
-     <div class="converstaions">
-       <%= link_to recipient.user.first_name,   conversation_messages_path(conversation)%>
-     </div>
- 
+
+    <% if conversation.sender_id == current_user.id ? conversation.receiver_id : conversation.sender_id %>
+       <% recipient = User.find(conversation.receiver_id) %>
+    <% else %>
+       <% recipient = User.find(conversation.sender_id) %>
     <% end %>
-   <% end %>
+
+     <div class="converstaions">
+       <%= link_to recipient.first_name,   conversation_messages_path(conversation)%>
+     </div>
 
 
+  <% end %>
 </ul>
 
 
