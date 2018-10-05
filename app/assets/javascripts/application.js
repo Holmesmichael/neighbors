@@ -11,13 +11,14 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require react
 //= require react_ujs
 //= require react_rails_img
 //= require components
-//= require jquery3
 //= require popper
 //= require bootstrap
 //= require components
+//= require jquery3
+//= require jquery_ujs
+//= require turbolinks
 //= require_tree .

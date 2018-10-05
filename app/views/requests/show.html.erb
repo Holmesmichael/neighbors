@@ -1,70 +1,99 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong> Title:</strong>
-  <%= @request.title %>
-</p>
-<p>
-  <strong> Description:</strong>
-  <%= @request.description %>
-</p>
-<p>
-  <strong> Address:</strong>
-  <%= @request.address %>
-</p>
-<p>
-  <strong> Volunteers:</strong>
-  <%= @request.done %>
-</p>
-<p>
-  <strong> By:</strong>
-<%= @request.user.first_name %>
-</p>
-      <% if current_user == @request.user %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+    <% if current_user == @request.user %>
+        <% if @request.done > 5 %>
+            <h4> Did someone bail out on you?</h4>
+            <%= simple_form_for @request, url: incr_done_request_path do |f| %>
+              <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
+              <%= f.button :submit %>
+            <% end %>
+        <% else %>
 
-      <%= simple_form_for @request, url: incr_done_request_path do |f| %>
-        <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
-        <%= f.button :submit %>
-      <% end %>
+           <h4>Hope someone helps you soon!</h4>
+        <% end %>
 
-      <% else %>
+    <% else %>
 
-      <h2> To help please complete both steps</h2>
+        <h2> To help please complete both steps</h2>
 
 
-      <h3> 1. Select if you can complete </h3>
+        <h3> 1. Select if you can complete </h3>
 
+        
+            <%= simple_form_for @request, url: incr_done_request_path do |f| %>
+
+              <%= f.radio_button :done, 1 %>I am helping<br/><br/>
+              <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
+
+            <%= f.button :submit %>
+
+            <% end %>
+
+            <h3> 2. Send message to organize help </h3>
+
+            <%= link_to "Volunteer", conversations_path(sender_id: current_user,receiver_id: @request.user.id), method: :post %>
       
-          <%= simple_form_for @request, url: incr_done_request_path do |f| %>
 
-            <%= f.radio_button :done, 1 %>I am helping<br/><br/>
-            <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
+    <% end %>
+    </div>
+    <div class="col-sm-5">
+    <p>
+    <strong> Title:</strong>
+    <%= @request.title %>
+  </p>
+  <p>
+    <strong> Description:</strong>
+    <%= @request.description %>
+  </p>
+  <p>
+    <strong> Address:</strong>
+    <%= @request.address %>
+  </p>
+  <p>
+    <strong> Volunteers:</strong>
+    <%= @request.done %>
+  </p>
+  <p>
+    <strong> By:</strong>
+  <%= @request.user.first_name %>
+  </p>
+        
+  
+  
+  
+        <br/>
+  
+        <br/>
+  
+  
+  
+  <br/>
+  <br/>
+  
+  
+  
+  
+  
+  
+  
+  
+    </div>
+    <div class="col-sm-2">
 
-          <%= f.button :submit %>
+    <% if current_user == @request.user %>
 
-          <% end %>
-
-          <h3> 2. Send message to organize help </h3>
-
-          <%= link_to 'Message', conversations_path(@conversation) %> 
-
-          <%= link_to "Volunteer", conversations_path(sender_id: current_user,recipient_id: @request.user.id), method: :post %>
-    
-
-      <% end %>
-
-
-
-      <br/>
-
-      <br/>
+    <%= link_to 'Edit', edit_request_path(@request) %>
+  
+  <%= link_to 'Destroy', request_path(@request), :confirm => "Are you sure?", :method => :delete %>
+  
+  
+    <% end %>
+      
+    </div>
+  </div>
+</div>
 
 
-
-<br/>
-<br/>
-
-
-
-<%= link_to 'Edit', edit_request_path(@request) %> |
-<%= link_to 'Back', requests_path %>

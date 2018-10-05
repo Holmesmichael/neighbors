@@ -12,13 +12,24 @@ class RequestsController < ApplicationController
 #GET /riders.json (showing null)
     def index
         @requests = Request.all
+     
         respond_to do |format|
             format.html 
+            format.json { render json: @requests }
+        end   
+    end
+
+    def request_creator
+        @requests = Request.all
+
+        respond_to do |format|
+            format.html
             format.json { render json: @requests }
         end
     end
 
     def show 
+   
         # request = Request.find(params[:id])
         # render json: {request:request}
        
@@ -35,7 +46,7 @@ class RequestsController < ApplicationController
         respond_to do |format|
             if @request.save
               format.html { redirect_to @request, notice: 'Request was successfully created.' }
-              format.json { render :show, status: :created, location: @request }
+              format.json { render :show, status: :created, Request: @request }
             else
               format.html { render :new }
               format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -46,6 +57,8 @@ class RequestsController < ApplicationController
     end
 
     def edit
+    
+ 
     end
 
    
@@ -56,7 +69,7 @@ class RequestsController < ApplicationController
             respond_to do |format|
                 if @request.update(done_params)
                 format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-                format.json { render :show, status: :ok, location: @request }
+                format.json { render :show, status: :ok, Request: @request }
                 else
                 format.html { render :edit }
                 format.json { render json: @request.errors, status: :unprocessable_entity }
@@ -66,13 +79,11 @@ class RequestsController < ApplicationController
 
     def destroy 
         if current_user = @request.user
-            if @request.destroy
-                json_response "Your request was deleted", true, {request: @request}, :ok
-            else
-                json_response "Sorry, could not delete", false, {}, :unprocessable_entity
-            end
-        else
-            json_response "Sorry, you do not have permission to delete this request", false, {}, :unauthorized
+          @request.destroy
+                respond_to do |format|
+                  format.html { redirect_to requests_url, notice: 'Request was successfully destroyed.' }
+                  format.json { head :no_content }
+                end
         end
     end
 
@@ -84,8 +95,22 @@ class RequestsController < ApplicationController
           @request.update_attributes(done: @request.done + count)
         end
       
-        redirect_to @request 
+        redirect_to @request
+
       end
+
+      def timer
+        @request = Request.find(params[:id])
+
+        timer = Time.now 
+
+        if (Time.now - 24.hours) <= @request.created_at || @request.updated_at 
+            
+        else 
+            
+        end
+    end
+
 
     private
 
@@ -101,7 +126,9 @@ class RequestsController < ApplicationController
         params.require(:request).permit(:done)
     end
 
+   
 
+   
   
 
  

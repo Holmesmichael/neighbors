@@ -1,1 +1,22 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+        <h5>How many open request are there?</h5>
+        <p><%= Request.where("done < 5").count do |count| %>
+        <% end %></p>
+        <h5>How many open request are done?</h5>
+        <p><%= Request.where("done >= 5").count do |count| %>
+        <% end %></p>
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div>
+
 <%= react_component "Landing" %> 
+

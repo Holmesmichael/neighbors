@@ -6,6 +6,9 @@
     <div class="col-sm-4">
       <h1>Help Needed!</h1>
 
+     <p><%= @incr_done %></p>
+
+
      <h3>This symbol means request</h3> 
       <%= image_tag( "https://png.icons8.com/ultraviolet/1x/good-quality.png", size: "40x40") -%>
       <br/>
@@ -16,10 +19,12 @@
     
       <br/>
       <h3> Post request for a need </h3>
-      <button type="button" class="btn btn-primary"><%= link_to 'New Request', new_request_path %></button>
+      <button type="button" class="btn btn-success"><%= link_to 'New Request', new_request_path %></button>
 
 
     </div>
+
+
     <div class="col-sm-8">
 
     
@@ -81,7 +86,7 @@
             
             map.setCenter(pos);
             infoWindow.setPosition(pos);
-            infoWindow.setContent('Current location');
+            infoWindow.setContent('Current Location');
             infoWindow.open(map);
             map.setCenter(pos);
           }, function() {
@@ -95,20 +100,15 @@
 
             $.each(data, function(key, data) {
 
-               var latLng = new google.maps.LatLng( data.latitude , data.longitude );
-
+              
                var latLng = (data.done > 5) ? "null" : new google.maps.LatLng( data.latitude , data.longitude );
 
-              
+               
                var infowindow = new google.maps.InfoWindow({
                   content: '<a href="/requests/' + data.id + '">' + 'Click here to volunteer' + '</a><br/>' + 'Need:  '
                            + data.title + '<br/>' + 'Description:  ' + data.description + '<br/>' + ' Address:  ' + data.address +
                            '<br/>' + 'Need type:  ' + data.request_type + '<br/>' 
                 });
-
-
-               
-
 
                 var marker = new google.maps.Marker({
                     position: latLng,
@@ -117,6 +117,20 @@
                     title: (data.title + ' ' +data.request_type)
                  
                 });
+
+
+
+                var myDate = new Date();
+                    console.log('Today is ' + myDate.toLocaleString());
+                    myDate.setDate(myDate.getDate()-1);
+                    console.log(data.title + ' was created on ' + data.created_at)
+               
+              
+                if (data.created_at == myDate) { marker.position = "null"
+                 } else { marker.position = latLng };
+
+
+              
 
                 
                 if (data.request_type == 'Request') {
@@ -174,6 +188,44 @@
 
  
       
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+    <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @requests.each do |request| %>
+        <% if request.user == current_user %>
+            <tr>
+              <td><%= request.title %></td>
+                <td>
+                    <div class="btn-group btn-group-sm">
+                  
+           
+                          <%= link_to 'View', request, class: "btn btn-success" %>
+                  
+                              
+              </td>
+            </tr>
+        <% end %>
+      <% end %>
+   
+    </tbody>
+  </table>
+    </div>
+    <div class="col-sm">
+      One of three columns
     </div>
   </div>
 </div>

@@ -39,7 +39,7 @@ gem 'simple_form', '~> 3.5'
 gem 'react-rails-img'
 gem 'devise', '~> 4.2'
 gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
-gem 'paperclip', '~> 4.3', '>= 4.3.6'
+gem 'paperclip', "~> 6.0.0"
 gem 'geocoder', '~> 1.3', '>= 1.3.7'
 gem 'net_http_ssl_fix', '~> 0.0.9'
 
