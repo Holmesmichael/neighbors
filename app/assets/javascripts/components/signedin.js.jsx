@@ -16,7 +16,6 @@ var Signedin = React.createClass({
                             <a className="nav-item nav-link" href="/users/edit"><h6>Settings</h6></a>
                             <a className="nav-item nav-link" href="/requests"><h6>Map</h6></a>
                             <a className="nav-item nav-link" href="/conversations"><h6>Messages</h6></a>
-                            <a className="nav-item nav-link" href="#"><h6>Logout</h6></a> 
 
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm">
-      One of three columns
+    <%= link_to "Profile", current_user %>
     </div>
     <div class="col-sm">
         <h5>How many open request are there?</h5>
@@ -13,7 +13,7 @@
         <% end %></p>
     </div>
     <div class="col-sm">
-      One of three columns
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
     </div>
   </div>
 </div>

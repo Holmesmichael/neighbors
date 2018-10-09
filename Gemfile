@@ -42,6 +42,8 @@ gem 'bcrypt', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'b
 gem 'paperclip', "~> 6.0.0"
 gem 'geocoder', '~> 1.3', '>= 1.3.7'
 gem 'net_http_ssl_fix', '~> 0.0.9'
+gem 'carrierwave', '~> 0.11.2'
+gem 'mini_magick', '~> 4.9', '>= 4.9.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

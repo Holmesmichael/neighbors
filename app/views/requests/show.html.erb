@@ -3,8 +3,9 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-5">
+    
     <% if current_user == @request.user %>
-        <% if @request.done > 5 %>
+        <% if @request.done > 5 && @request.created_at > DateTime.now - (1.0) %>
             <h4> Did someone bail out on you?</h4>
             <%= simple_form_for @request, url: incr_done_request_path do |f| %>
               <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
