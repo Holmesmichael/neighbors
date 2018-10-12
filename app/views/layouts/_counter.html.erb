@@ -1,18 +1,18 @@
+<div class="request_counter">
+    <div class="container">
+        <h5>Open requests</h5>
+        <h4>
+            <%= Request.where("done < 5").count do |count| %>
+            <% end %>
+        </h4>
 
-
-
-<h5>How many open request are there?</h5>
-<p>
-    <%= Request.where("done < 5").count do |count| %>
-    <% end %>
-</p>
-
-<h5>How many open request are done?</h5>
-<p>
-    <%= Request.where("done >= 5").count do |count| %>
-    <% end %>
-</p>
-
+        <h5>Completed requests</h5>
+        <h4>
+            <%= Request.where("done >= 5").count do |count| %>
+            <% end %>
+        </h4>
+    </div>
+</div>
 
 <script>
     var time = new Date().getTime();

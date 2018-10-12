@@ -18,10 +18,10 @@
 
     <% else %>
 
-        <h2> To help please complete both steps</h2>
+        <h2> To assist please complete <strong>both</strong> steps</h2>
 
 
-        <h3> 1. Select if you can complete </h3>
+        <h3> Step One </h3>
 
         
             <%= simple_form_for @request, url: incr_done_request_path do |f| %>
@@ -33,14 +33,15 @@
 
             <% end %>
 
-            <h3> 2. Send message to organize help </h3>
+            <h3> Step Two </h3>
 
+            <div class="btn btn-success">
             <%= link_to "Volunteer", conversations_path(sender_id: current_user,receiver_id: @request.user.id), method: :post %>
-      
+            </div>
 
     <% end %>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-5" style="justify-content: center;">
     <p>
     <strong> Title:</strong>
     <%= @request.title %>
@@ -54,14 +55,6 @@
     <%= @request.address %>
   </p>
   <p>
-    <strong> Created:</strong>
-    <%= @request.created_at %>
-  </p>
-  <p>
-    <strong> Updated:</strong>
-    <%= @request.updated_at %>
-  </p>
-  <p>
     <strong> Volunteers:</strong>
     <%= @request.done %>
   </p>
@@ -72,21 +65,6 @@
   <% if current_user == @request.user %>
   <p><%= link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' } %></p>
   <% end %>
-  
-  
-  
-        <br/>
-  
-        <br/>
-  
-  
-  
-  <br/>
-  <br/>
-  
-  
-  
-  
   
   
   

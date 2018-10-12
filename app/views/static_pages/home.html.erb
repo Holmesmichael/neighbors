@@ -1,14 +1,23 @@
 
+<%= react_component "Landing" %> 
 
-<div class="container">
+
+<div class="container" style="margin-top:100px;">
   <div class="row">
     <div class="col-sm">
-    <%= link_to "Profile", current_user %>
+      <div class="card border-primary mb-3" style="max-width: 18rem;">
+        <div class="card-header">Header</div>
+        <div class="card-body text-primary">
+          <h5 class="card-title">Primary card title</h5>
+          <p class="card-text"><% if user_signed_in? %>
+          <%= link_to "My Profile", current_user %>
+          <% else %>
+          <% end %></p>
+        </div>
+      </div>
     </div>
     <div class="col-sm">
-     <div id="myDiv">
        <%= render ('layouts/counter') %>
-      </div>
     </div>
     <div class="col-sm">
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
