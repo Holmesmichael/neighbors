@@ -5,7 +5,7 @@
     <div class="col-sm-5">
     
     <% if current_user == @request.user %>
-        <% if @request.done > 5 && @request.created_at > DateTime.now - (1.0) %>
+        <% if @request.done > 5 && @request.updated_at > DateTime.now - (1.0) %>
             <h4> Did someone bail out on you?</h4>
             <%= simple_form_for @request, url: incr_done_request_path do |f| %>
               <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
@@ -54,6 +54,14 @@
     <%= @request.address %>
   </p>
   <p>
+    <strong> Created:</strong>
+    <%= @request.created_at %>
+  </p>
+  <p>
+    <strong> Updated:</strong>
+    <%= @request.updated_at %>
+  </p>
+  <p>
     <strong> Volunteers:</strong>
     <%= @request.done %>
   </p>
@@ -61,7 +69,9 @@
     <strong> By:</strong>
   <%= @request.user.first_name %>
   </p>
-        
+  <% if current_user == @request.user %>
+  <p><%= link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <% end %>
   
   
   

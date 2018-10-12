@@ -1,0 +1,28 @@
+
+
+
+<h5>How many open request are there?</h5>
+<p>
+    <%= Request.where("done < 5").count do |count| %>
+    <% end %>
+</p>
+
+<h5>How many open request are done?</h5>
+<p>
+    <%= Request.where("done >= 5").count do |count| %>
+    <% end %>
+</p>
+
+
+<script>
+    var time = new Date().getTime();
+    $(document.body).bind("mousemove keypress", function () {
+        time = new Date().getTime();
+    });
+
+    setInterval(function() {
+        if (new Date().getTime() - time >= 5000) {
+            window.location.reload(true);
+        }
+    }, 1000);
+</script>

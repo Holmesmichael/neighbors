@@ -3,21 +3,21 @@
 one:
   title: MyString
   description: MyText
-  lat: 1.5
-  lng: 1.5
+  latitude: 1.5
+  longitude: 1.5
   address: MyString
   done: 1
   counter: 1
   request_type: MyString
-  user: 
+  user: 1
 
 two:
   title: MyString
   description: MyText
-  lat: 1.5
-  lng: 1.5
+  latitude: 1.5
+  longitude: 1.5
   address: MyString
   done: 1
   counter: 1
   request_type: MyString
-  user: 
+  user: 1

@@ -10,7 +10,7 @@ class Request < ApplicationRecord
     after_validation :reverse_geocode
 
      valid_types = ['help', 'material']
-    #  validates_presence_of :title, :description, :latitude, :longitude, :user_id, :request_type
+      validates_presence_of :title, :description, :latitude, :longitude, :user_id, :request_type, :done
     #  validates :title, length: { maximum: 50 }
     #  validates :description, length: { maximum: 300 }
      

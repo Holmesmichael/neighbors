@@ -1,16 +1,14 @@
 
+
 <div class="container">
   <div class="row">
     <div class="col-sm">
     <%= link_to "Profile", current_user %>
     </div>
     <div class="col-sm">
-        <h5>How many open request are there?</h5>
-        <p><%= Request.where("done < 5").count do |count| %>
-        <% end %></p>
-        <h5>How many open request are done?</h5>
-        <p><%= Request.where("done >= 5").count do |count| %>
-        <% end %></p>
+     <div id="myDiv">
+       <%= render ('layouts/counter') %>
+      </div>
     </div>
     <div class="col-sm">
     <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
