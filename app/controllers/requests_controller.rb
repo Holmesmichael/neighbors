@@ -97,19 +97,9 @@ class RequestsController < ApplicationController
       
         redirect_to @request
 
-      end
-
-      def timer
-        @request = Request.find(params[:id])
-
-        timer = Time.now 
-
-        if (Time.now - 24.hours) <= @request.created_at || @request.updated_at 
-            
-        else 
-            
-        end
     end
+
+    
 
 
     private
