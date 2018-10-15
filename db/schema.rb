@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181007112741) do
+ActiveRecord::Schema.define(version: 20181014032709) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20181007112741) do
     t.datetime "updated_at", null: false
     t.float "latitude"
     t.float "longitude"
+    t.string "volunteer"
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
@@ -65,6 +66,7 @@ ActiveRecord::Schema.define(version: 20181007112741) do
     t.integer "ID_file_size"
     t.datetime "ID_updated_at"
     t.string "image"
+    t.string "volunteer"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

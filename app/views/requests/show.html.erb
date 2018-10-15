@@ -27,10 +27,12 @@
             <%= simple_form_for @request, url: incr_done_request_path do |f| %>
 
               <%= f.radio_button :done, 1 %>I am helping<br/><br/>
-              <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
+              <%= f.radio_button :done, -1 %>Maybe next time<br/><br/><h1>delete this pre release</h1>
+              <%= f.select :counter, :collection => [current_user.first_name]  %>I am helping<br/><br/>
+            <%= f.button :submit  %>
 
-            <%= f.button :submit %>
-
+        
+            
             <% end %>
 
             <h3> Step Two </h3>
@@ -58,6 +60,10 @@
     <strong> Volunteers:</strong>
     <%= @request.done %>
   </p>
+  <p>
+  <strong> WHo:</strong>
+  <%= @request.counter %>
+</p>
   <p>
     <strong> By:</strong>
   <%= @request.user.first_name %>

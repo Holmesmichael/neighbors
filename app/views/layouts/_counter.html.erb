@@ -1,12 +1,12 @@
-<div class="request_counter">
+<div class="request_counter"style="justify-content:center;">
     <div class="container">
-        <h5>Open requests</h5>
+        <h6>Open</h6>
         <h4>
             <%= Request.where("done < 5").count do |count| %>
             <% end %>
         </h4>
 
-        <h5>Completed requests</h5>
+        <h6>Completed</h6>
         <h4>
             <%= Request.where("done >= 5").count do |count| %>
             <% end %>
@@ -14,15 +14,5 @@
     </div>
 </div>
 
-<script>
-    var time = new Date().getTime();
-    $(document.body).bind("mousemove keypress", function () {
-        time = new Date().getTime();
-    });
 
-    setInterval(function() {
-        if (new Date().getTime() - time >= 5000) {
-            window.location.reload(true);
-        }
-    }, 1000);
-</script>
+<script>setTimeout("location.reload();",10000);</script>

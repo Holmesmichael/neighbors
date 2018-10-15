@@ -1,7 +1,8 @@
 class VolunteersController < ApplicationController
   before_action :set_volunteer, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
-  # before_action :get_request
+  before_action :get_user
+  before_action :get_request
   
 
   # GET /volunteers
@@ -30,9 +31,7 @@ class VolunteersController < ApplicationController
   def create
     @volunteer = Volunteer.new(volunteer_params)
     @volunteer.user = current_user
-    # @volunteer.request = Volunteer.find(volunteer_params)
-  
-
+    
     respond_to do |format|
       if @volunteer.save
         format.html { redirect_to @volunteer, notice: 'Volunteer was successfully created.' }
@@ -77,6 +76,10 @@ class VolunteersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def volunteer_params
       params.require(:volunteer).permit(:user_id, :request_id, :done)
+    end
+
+    def get_user
+      @user = User.find(params[:id])
     end
 
     def get_request

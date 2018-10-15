@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'static_pages/home'
   get 'static_pages/map'
 
+
   root 'static_pages#home'
 
   resources :conversations, only: [:index, :create] do

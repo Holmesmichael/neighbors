@@ -89,23 +89,24 @@ class RequestsController < ApplicationController
 
     def incr_done
         @request = Request.find(params[:id])
+        @request.counter = current_user
+
         count = params[:request] && params[:request][:done].to_i
-      
+
         if count.in? [-1,1]
           @request.update_attributes(done: @request.done + count)
         end
-      
+
         redirect_to @request
 
     end
-
     
 
 
     private
 
     def request_params
-        params.require(:request).permit(:title, :description, :request_type, :address, :done)
+        params.require(:request).permit(:title, :description, :request_type, :address, :volunteer,:counter, :done)
     end
 
     def set_request

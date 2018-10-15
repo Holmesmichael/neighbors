@@ -1,16 +1,8 @@
+<%= simple_form_for @request, url: incr_done_request_path do |f| %>
 
-<%= simple_form_for(@volunteer) do |f| %>
-  <%= f.error_notification %>
+  <%= f.radio_button :done, 1 %>I am helping<br/><br/>
+  <%= f.radio_button :done, -1 %>Maybe next time<br/><br/>
 
- 
- 
-    <%= f.association :request %>
-    <%= f.radio_button :done, 1 %>I am helping<br/><br/>
-    <%= f.radio_button :done, 0 %>Maybe next time<br/><br/>
-    
- 
+<%= f.button :submit %>
 
- 
-    <%= f.button :submit %>
-  
 <% end %>
