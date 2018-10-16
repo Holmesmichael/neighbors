@@ -106,7 +106,7 @@ class RequestsController < ApplicationController
     private
 
     def request_params
-        params.require(:request).permit(:title, :description, :request_type, :address, :volunteer,:counter, :done)
+        params.require(:request).permit(:title, :description, :request_type, :address, :volunteer, :done)
     end
 
     def set_request

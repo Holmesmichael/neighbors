@@ -3,90 +3,76 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-5">
-    
-    <% if current_user == @request.user %>
-        <% if @request.done > 5 && @request.updated_at > DateTime.now - (1.0) %>
-            <h4> Did someone bail out on you?</h4>
-            <%= simple_form_for @request, url: incr_done_request_path do |f| %>
-              <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
-              <%= f.button :submit %>
+        
+        <% if current_user == @request.user %>
+            <% if @request.done > 5 && @request.updated_at > DateTime.now - (1.0) %>
+                <h4> Did someone bail out on you?</h4>
+                <%= simple_form_for @request, url: incr_done_request_path do |f| %>
+                  <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
+                  <%= f.button :submit %>
+                <% end %>
+            <% else %>
+              <h4>Hope someone helps you soon!</h4>
             <% end %>
+
         <% else %>
 
-           <h4>Hope someone helps you soon!</h4>
-        <% end %>
-
-    <% else %>
-
-        <h2> To assist please complete <strong>both</strong> steps</h2>
+            <h2> To assist please complete <strong>both</strong> steps</h2>
 
 
-        <h3> Step One </h3>
+            <h3> Step One </h3>
 
-        
-            <%= simple_form_for @request, url: incr_done_request_path do |f| %>
-
-              <%= f.radio_button :done, 1 %>I am helping<br/><br/>
-              <%= f.radio_button :done, -1 %>Maybe next time<br/><br/><h1>delete this pre release</h1>
-              <%= f.select :counter, :collection => [current_user.first_name]  %>I am helping<br/><br/>
-            <%= f.button :submit  %>
-
-        
             
-            <% end %>
+                <%= simple_form_for @request, url: incr_done_request_path do |f| %>
 
-            <h3> Step Two </h3>
+                  <%= f.radio_button :done, 1 %>I am helping<br/><br/>
+                  <%= f.radio_button :done, -1 %>Maybe next time<br/><br/><h1>
+              
+                <%= f.button :submit  %>
 
-            <div class="btn btn-success">
-            <%= link_to "Volunteer", conversations_path(sender_id: current_user,receiver_id: @request.user.id), method: :post %>
-            </div>
+            
+                
+                <% end %>
 
-    <% end %>
+                <h3> Step Two </h3>
+
+                <div class="btn btn-success">
+                <%= link_to "Volunteer", conversations_path(sender_id: current_user,receiver_id: @request.user.id), method: :post %>
+                </div>
+
+        <% end %>
     </div>
     <div class="col-sm-5" style="justify-content: center;">
-    <p>
-    <strong> Title:</strong>
-    <%= @request.title %>
-  </p>
-  <p>
-    <strong> Description:</strong>
-    <%= @request.description %>
-  </p>
-  <p>
-    <strong> Address:</strong>
-    <%= @request.address %>
-  </p>
-  <p>
-    <strong> Volunteers:</strong>
-    <%= @request.done %>
-  </p>
-  <p>
-  <strong> WHo:</strong>
-  <%= @request.counter %>
-</p>
-  <p>
-    <strong> By:</strong>
-  <%= @request.user.first_name %>
-  </p>
-  <% if current_user == @request.user %>
-  <p><%= link_to 'Destroy', @request, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-  <% end %>
-  
-  
-  
-  
+      <p>
+      <strong> Title:</strong>
+      <%= @request.title %>
+      </p>
+      <p>
+        <strong> Details:</strong>
+        <%= @request.description %>
+      </p>
+      <p>
+        <strong> Address:</strong>
+        <%= @request.address %>
+      </p>
+      <p>
+        <strong>How many volunteers:</strong>
+        <%= @request.done %>
+      </p>
+      <p>
+        <strong> By:</strong>
+      <%= @request.user.first_name %>
+      </p>
     </div>
     <div class="col-sm-2">
 
-    <% if current_user == @request.user %>
+      <% if current_user == @request.user %>
 
-    <%= link_to 'Edit', edit_request_path(@request) %>
-  
-  <%= link_to 'Destroy', request_path(@request), :confirm => "Are you sure?", :method => :delete %>
-  
-  
-    <% end %>
-      
+      <%= link_to 'Edit', edit_request_path(@request) %>
+      <br/>
+      <%= link_to 'Destroy', request_path(@request), :confirm => "Are you sure?", :method => :delete %>
+      <% end %>
+        
     </div>
   </div>
 </div>

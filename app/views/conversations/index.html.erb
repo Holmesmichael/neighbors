@@ -1,21 +1,32 @@
-<h1>Inbox</h1>
-<ul>
- 
 
-  <% @conversations.each do |conversation| %>
+<div class="inbox">
+  <div class="container">
+    <div class="card bg-light mb-3" style="max-width: 18rem;">
+      <div class="card-header">Header</div>
+      <div class="card-body">
+        <h5 class="card-title">Inbox</h5>
+        <p class="card-text">
+        <ul>
+            <% @conversations.each do |conversation| %>
 
-    <% if conversation.sender_id == current_user.id ? conversation.receiver_id : conversation.sender_id %>
-       <% recipient = User.find(conversation.receiver_id) %>
-    <% else %>
-       <% recipient = User.find(conversation.sender_id) %>
-    <% end %>
+                <% if conversation.sender_id == current_user.id ? conversation.receiver_id : conversation.sender_id %>
+                  <% recipient = User.find(conversation.receiver_id) %>
+                <% else %>
+                  <% recipient = User.find(conversation.sender_id) %>
+                <% end %>
 
-     <div class="converstaions">
-       <%= link_to recipient.first_name,   conversation_messages_path(conversation)%>
-     </div>
-
-
-  <% end %>
-</ul>
-
-
+              <li>
+              <div class="converstaions">
+                <%= link_to conversation.sender.first_name,   conversation_messages_path(conversation)%>
+              </div>
+              </li>
+                <% if !conversation.unread_message_count(current_user).zero? %>
+                (<%= conversation.unread_message_count(current_user) %>)
+                  <% end %>
+                <% end %>
+            </ul>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

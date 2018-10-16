@@ -25,6 +25,10 @@ class ConversationsController < ApplicationController
     def conversation_params
       params.permit(:sender_id, :receiver_id)
     end
+
+    def unread_message_count(current_user)
+      self.messages.where("user_id != ? AND read = ?", current_user.id, false).count
+    end
     
 end
 

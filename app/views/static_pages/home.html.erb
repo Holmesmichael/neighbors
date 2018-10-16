@@ -10,6 +10,7 @@
             <div class="card-header">Welcome to Neighborly</div>
               <div class="card-body text-primary">
                 <h5 class="card-text"><% if user_signed_in? %>
+                <%= image_tag(current_user.image.url) %>
                 <h5>Hello <%= current_user.first_name %> </h5>
                 <%= link_to "Profile", current_user %>
                 <br />
