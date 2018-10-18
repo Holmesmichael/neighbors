@@ -5,42 +5,50 @@
     <div class="col-sm-5">
         
         <% if current_user == @request.user %>
-            <% if @request.done > 5 && @request.updated_at > DateTime.now - (1.0) %>
+
+            <% if @request.request_conversation > 5 && @request.updated_at > DateTime.now - (1.0) %>
                 <h4> Did someone bail out on you?</h4>
-                <%= simple_form_for @request, url: incr_done_request_path do |f| %>
-                  <%= f.radio_button :done, -1 %>Remove volunteer<br/><br/>
-                  <%= f.button :submit %>
-                <% end %>
-            <% else %>
-              <h4>Hope someone helps you soon!</h4>
+
+                <%= link_to 'Resubmit', edit_request_path(@request),class: "btn btn-warning" %>
+
+                <div class="col-md-8">
             <% end %>
+
+                <h2>Messages</h2>
+
+                  <% @request.conversations.each do |conversation| %>
+                    <% if conversation.sender_id == current_user.id ? conversation.receiver_id : conversation.sender_id %>
+                      <% recipient = User.find(conversation.sender_id) %>
+
+                    <% else %>
+
+                        <% recipient = User.find(conversation.receiver_id) %>
+
+                    <% end %>
+
+                      <div class="conversations">
+                        <%= link_to conversation.sender.first_name, conversation_messages_path(conversation)%>
+                      </div>
+
+                    <% end %>
+             
+
+        <% elsif  @request.volunteered_by?(current_user)%>
+
+                <p class="text-info">You have already sent a message</p>
+
+
 
         <% else %>
 
-            <h2> To assist please complete <strong>both</strong> steps</h2>
-
-
-            <h3> Step One </h3>
-
-            
-                <%= simple_form_for @request, url: incr_done_request_path do |f| %>
-
-                  <%= f.radio_button :done, 1 %>I am helping<br/><br/>
-                  <%= f.radio_button :done, -1 %>Maybe next time<br/><br/><h1>
-              
-                <%= f.button :submit  %>
-
-            
-                
+            <h2> To assist <strong>please</strong>submit a message</h2>
+             
+                <%= simple_form_for @request, url: volunteer_request_path do |f| %>
+                  <%= link_to "Send Message", conversations_path(request_id: @request.id,sender_id: current_user.id,receiver_id: @request.user_id), method: :post %>              
                 <% end %>
 
-                <h3> Step Two </h3>
-
-                <div class="btn btn-success">
-                <%= link_to "Volunteer", conversations_path(sender_id: current_user,receiver_id: @request.user.id), method: :post %>
-                </div>
-
         <% end %>
+
     </div>
     <div class="col-sm-5" style="justify-content: center;">
       <p>
@@ -60,6 +68,10 @@
         <%= @request.done %>
       </p>
       <p>
+      <strong>How many </strong>
+      <%= @request.request_conversation %>
+    </p>
+      <p>
         <strong> By:</strong>
       <%= @request.user.first_name %>
       </p>
@@ -71,6 +83,7 @@
       <%= link_to 'Edit', edit_request_path(@request) %>
       <br/>
       <%= link_to 'Destroy', request_path(@request), :confirm => "Are you sure?", :method => :delete %>
+
       <% end %>
         
     </div>

@@ -10,9 +10,7 @@
             <% @conversations.each do |conversation| %>
 
                 <% if conversation.sender_id == current_user.id ? conversation.receiver_id : conversation.sender_id %>
-                  <% recipient = User.find(conversation.receiver_id) %>
-                <% else %>
-                  <% recipient = User.find(conversation.sender_id) %>
+                <% receiver = User.find(conversation.receiver_id) %>
                 <% end %>
 
               <li>

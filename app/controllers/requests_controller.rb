@@ -28,11 +28,13 @@ class RequestsController < ApplicationController
         end
     end
 
-    def show 
-   
-        # request = Request.find(params[:id])
-        # render json: {request:request}
-       
+    def request_counter
+        @requests = Request.where(status:0).count
+    end
+
+    def show  
+      @request = Request.find(params[:id])
+      @conversation= Conversation.new(id: @request.id)       
     end
 
     def new
@@ -65,9 +67,11 @@ class RequestsController < ApplicationController
 
     def update
         @request = Request.find(params[:id])
-        @request.increment! :done
+        # @request.increment! :done
             respond_to do |format|
-                if @request.update(done_params)
+                if @request.update(request_conversation_params)
+                @request.request_conversation = 0
+                @request.save
                 format.html { redirect_to @request, notice: 'Request was successfully updated.' }
                 format.json { render :show, status: :ok, Request: @request }
                 else
@@ -87,20 +91,32 @@ class RequestsController < ApplicationController
         end
     end
 
-    def incr_done
+    # def incr_done
+    #     @request = Request.find(params[:id])
+    #     @request.counter = current_user
+
+    #     count = params[:request] && params[:request][:done].to_i
+
+    #     if count.in? [-1,1]
+    #       @request.update_attributes(done: @request.done + count)
+    #     end
+
+    #     redirect_to @request
+
+    # end
+
+    def republish
         @request = Request.find(params[:id])
-        @request.counter = current_user
-
-        count = params[:request] && params[:request][:done].to_i
-
-        if count.in? [-1,1]
-          @request.update_attributes(done: @request.done + count)
-        end
-
-        redirect_to @request
-
+             @request.updated_at = Time.now
+             @request.save
+          redirect_to @request, notice: 'Request was updated.'
     end
     
+    def volunteer
+        @request = Request.find(params[:id])
+        @conversation = Conversation.create!(request_id: @request.id,sender_id: current_user.id,receiver_id: @request.user_id)
+        redirect_to @request
+    end
 
 
     private
@@ -113,9 +129,12 @@ class RequestsController < ApplicationController
         @request = Request.find(params[:id])
     end
 
-    def done_params
-        params.require(:request).permit(:done)
+    def request_conversation_params
+        params.require(:request).permit(:request_conversation)
     end
+    # def done_params
+    #     params.require(:request).permit(:done)
+    # end
 
    
 

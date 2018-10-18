@@ -4,17 +4,16 @@ class ConversationsController < ApplicationController
   
 
   def index
-    
     @conversations = Conversation.where("sender_id = ? OR receiver_id = ?", current_user.id, current_user.id)
-    
     @requests = Request.all
     @users = User.all - [current_user]
   end
 
   def create
+    sender_id = current_user.id
     
-    if Conversation.between(params[:sender_id], params[:receiver_id]).present?
-      @conversation = Conversation.between(params[:sender_id], params[:receiver_id]).first
+    if Conversation.between(params[:sender_id],params[:request_id]).present?
+      @conversation = Conversation.between(params[:sender_id],  params[:request_id]).first
     else
       @conversation = Conversation.create!(conversation_params)
     end
@@ -23,7 +22,7 @@ class ConversationsController < ApplicationController
 
   private
     def conversation_params
-      params.permit(:sender_id, :receiver_id)
+      params.permit(:sender_id, :receiver_id,:request_id)
     end
 
     def unread_message_count(current_user)

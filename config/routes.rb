@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   end
   
   resources :requests do
-    member { patch 'incr_done' }
+    # member { patch 'incr_done' }
+    member do
+      patch 'volunteer'
+      patch 'resubmit'
+    end
   end
   
 end
