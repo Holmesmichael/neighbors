@@ -16,11 +16,6 @@ class RequestsControllerTest < ActionDispatch::IntegrationTest
     assert_response 200
   end
 
-  test "should show request" do
-    get request_url(@request)
-    assert_response :success
-  end
-
 
   test "should update request" do
     patch request_url(@request), params: { request: {title: 'title', description: 'description', address: 'address', done: '0', request_type: 'help' } }
