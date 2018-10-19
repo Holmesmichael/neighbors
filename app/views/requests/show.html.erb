@@ -6,7 +6,7 @@
         
         <% if current_user == @request.user %>
 
-            <% if @request.request_conversation > 5 && @request.updated_at > DateTime.now - (1.0) %>
+            <% if @request.conversations_count > 5 && @request.updated_at > DateTime.now - (1.0) %>
                 <h4> Did someone bail out on you?</h4>
 
                 <%= link_to 'Resubmit', edit_request_path(@request),class: "btn btn-warning" %>
@@ -64,12 +64,8 @@
         <%= @request.address %>
       </p>
       <p>
-        <strong>How many volunteers:</strong>
-        <%= @request.done %>
-      </p>
-      <p>
-      <strong>How many </strong>
-      <%= @request.request_conversation %>
+      <strong>How many are helping: </strong>
+      <%= @request.conversations_count %>
     </p>
       <p>
         <strong> By:</strong>

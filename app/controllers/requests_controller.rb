@@ -1,8 +1,6 @@
 class RequestsController < ApplicationController
     before_action :set_request, only: [:show, :edit, :update, :destroy]
     respond_to? :json
-    
-
 
     def request_map
         format.json { render :json => @requests.to_json(:only => [:id, :title, :description, :address, :request_type, :done], :methods => [:to_param]) }
@@ -69,8 +67,8 @@ class RequestsController < ApplicationController
         @request = Request.find(params[:id])
         # @request.increment! :done
             respond_to do |format|
-                if @request.update(request_conversation_params)
-                @request.request_conversation = 0
+                if @request.update(conversations_count_params)
+                @request.conversations_count = 0
                 @request.save
                 format.html { redirect_to @request, notice: 'Request was successfully updated.' }
                 format.json { render :show, status: :ok, Request: @request }
@@ -129,18 +127,12 @@ class RequestsController < ApplicationController
         @request = Request.find(params[:id])
     end
 
-    def request_conversation_params
-        params.require(:request).permit(:request_conversation)
+    def conversations_count_params
+        params.require(:request).permit(:conversations_count)
     end
     # def done_params
     #     params.require(:request).permit(:done)
     # end
-
-   
-
-   
-  
-
  
 end
 

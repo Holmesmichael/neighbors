@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181018021059) do
+ActiveRecord::Schema.define(version: 20181019031156) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer "sender_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20181018021059) do
     t.float "longitude"
     t.string "volunteer"
     t.integer "request_conversation", default: 0
+    t.integer "conversations_count", default: 0
     t.index ["user_id"], name: "index_requests_on_user_id"
   end
 

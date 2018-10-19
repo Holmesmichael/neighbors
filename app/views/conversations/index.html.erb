@@ -9,9 +9,12 @@
         <ul>
             <% @conversations.each do |conversation| %>
 
-                <% if conversation.sender_id == current_user.id ? conversation.receiver_id : conversation.sender_id %>
-                <% receiver = User.find(conversation.receiver_id) %>
-                <% end %>
+              <% if conversation.sender_id == current_user.id %>
+              <% recipient = User.find(conversation.receiver_id) %>
+      
+              <% elsif conversation.receiver_id == current_user.id %>
+                  <% receiver = User.find(conversation.sender_id) %>
+              <% end %>
 
               <li>
               <div class="converstaions">
