@@ -102,7 +102,16 @@
             $.each(data, function(key, data) {
 
               
-               var latLng = (data.done > 5) ? "null" : new google.maps.LatLng( data.latitude , data.longitude );
+               var latLng = (data.conversations_count > 5) ? "null" : new google.maps.LatLng( data.latitude , data.longitude );
+
+
+               var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    title: (data.title + ' ' +data.request_type)
+                 
+                });
 
                
                var infowindow = new google.maps.InfoWindow({
@@ -111,29 +120,8 @@
                            '<br/>' + 'Need type:  ' + data.request_type + '<br/>' 
                 });
 
-                var marker = new google.maps.Marker({
-                    position: latLng,
-                    map: map,
-                    animation: google.maps.Animation.DROP,
-                    title: (data.title + ' ' +data.request_type)
-                 
-                });
-
-
-
-                var myDate = new Date();
-                    console.log('Today is ' + myDate.toLocaleString());
-                    myDate.setDate(myDate.getDate()-1);
-                    console.log(data.title + ' was created on ' + data.created_at)
-               
               
-                if (data.created_at == myDate) { marker.position = "null"
-                 } else { marker.position = latLng };
-
-
-              
-
-                
+          
                 if (data.request_type == 'Request') {
                   marker.setIcon('https://png.icons8.com/ultraviolet/1x/good-quality.png');
                  }
