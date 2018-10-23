@@ -1,5 +1,33 @@
 @import "bootstrap";
 
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Cabin');
+/*******************************
+             TYPE
+*******************************/
+
+p, h1, h2, h3, h4, h5, h6 {
+
+}
+
+p {
+    font-family: 'Quicksand', serif;
+    font-size: 18px;
+}
+
+h2, h3, h4, h5{
+    font-family: 'Cabin', serif;
+    font-size: 18px;
+}
+
+h1, h6 {
+    font-family: 'Pacifico', serif;
+    font-size: 18px;
+}
+/*******************************
+         LANDING PAGE
+*******************************/
 .home-landing {
    //  margin-top: 50px;
 
@@ -15,11 +43,9 @@
     text-align: center;
     display: block;
     margin-left: auto;
-    margin-left: 10%;
-}
-
-.signingin, .signingup, .edit_user, .can_you_help{
-    text-align: center;
+    margin-left: 20%;
+    text-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    
 }
 
 .landing {
@@ -32,13 +58,37 @@
 
    #logo {
        opacity: 0.9;
+       border-radius: 50%;
+       box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
    }
 }
 
-.login {
-   margin-top: 70px;
+
+
+.request_counter {
+    .open_count{
+        color: red;
+    }
+
+    .closed_count {
+        color: green;
+    }
 }
 
-.inbox {
-    margin-top: 100px;
+/********************************
+            Log in/Sign up
+********************************/
+
+
+.signingin, .signingup, .edit_user, .can_you_help{
+    text-align: center;
 }
+
+.login {
+    margin-top: 70px;
+ }
+ 
+ .inbox {
+     margin-top: 100px;
+ }

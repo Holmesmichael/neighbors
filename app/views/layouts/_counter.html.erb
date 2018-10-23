@@ -2,14 +2,18 @@
     <div class="container">
         <h6>Open</h6>
         <h4>
-            <%= Request.where("request_conversation < 5").count do |count| %>
-            <% end %>
+            <div class="open_count">
+                <%= Request.where("request_conversation < 5").count do |count| %>
+                <% end %>
+            </div>
         </h4>
 
         <h6>Completed</h6>
         <h4>
-            <%= Request.where("request_conversation >= 5").count do |count| %>
-            <% end %>
+            <div class="closed_count">
+                <%= Request.where("request_conversation >= 5").count do |count| %>
+                <% end %>
+            </div>
         </h4>
     </div>
 </div>

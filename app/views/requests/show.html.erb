@@ -4,14 +4,25 @@
   <div class="row">
     <div class="col-sm-5">
         
+        
+        # If/else statement if the current user is the request owner then:
+        # -button for resubmission if after 24/hrs if there is not enough volunteers you are able to republish the request
+        # -view the list of volunteers who are helping
+        # -click on the name of volunteer and view the conversation
+
+        # If the volunteer is viewing the page:
+        # -option to initiate message
+        # -message disabled if they have already volunteered for the project
+
         <% if current_user == @request.user %>
+      
 
             <% if @request.conversations_count > 5 && @request.updated_at > DateTime.now - (1.0) %>
-                <h4> Did someone bail out on you?</h4>
+                  <h4>Not get the help you expected...do not feel sad, resubmit your request!</h4>
 
-                <%= link_to 'Resubmit', edit_request_path(@request),class: "btn btn-warning" %>
+                  <%= link_to 'Resubmit', edit_request_path(@request),class: "btn btn-warning" %>
 
-                <div class="col-md-8">
+                  <div class="col-md-8">
             <% end %>
 
                 <h2>Messages</h2>
@@ -30,7 +41,7 @@
                         <%= link_to conversation.sender.first_name, conversation_messages_path(conversation)%>
                       </div>
 
-                    <% end %>
+                   <% end %>
              
 
         <% elsif  @request.volunteered_by?(current_user)%>
@@ -41,7 +52,7 @@
 
         <% else %>
 
-            <h2> To assist <strong>please</strong>submit a message</h2>
+            <h2> To assist you must submit a message</h2>
              
                 <%= simple_form_for @request, url: volunteer_request_path do |f| %>
                   <%= link_to "Send Message", conversations_path(request_id: @request.id,sender_id: current_user.id,receiver_id: @request.user_id), method: :post %>              
@@ -50,6 +61,9 @@
         <% end %>
 
     </div>
+
+    # Basic important details to see about the request
+
     <div class="col-sm-5" style="justify-content: center;">
       <p>
       <strong> Title:</strong>
@@ -66,24 +80,33 @@
       <p>
       <strong>How many are helping: </strong>
       <%= @request.conversations_count %>
-    </p>
+      </p>
       <p>
-        <strong> By:</strong>
+      <strong> By:</strong>
       <%= @request.user.first_name %>
       </p>
     
     </div>
+
+
     <div class="col-sm-2">
 
       <% if current_user == @request.user %>
 
       <%= link_to 'Edit', edit_request_path(@request) %>
+
       <br/>
+
       <%= link_to 'Destroy', request_path(@request), :confirm => "Are you sure?", :method => :delete %>
 
       <% end %>
-      <%= link_to 'Back', requests_path %>
+
+      <br />
+
+      <%= link_to 'Back to Map', requests_path %>
+
     </div>
+
   </div>
 </div>
 

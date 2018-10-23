@@ -7,7 +7,7 @@ var Landing = React.createClass({
       return (
        <div className="landing">
          <div className="container">
-              <Img src="/assets/hat.jpg" id="logo" width="100%" height="90%" />
+              <Img src="/assets/hat.jpg" id="logo" width="60%" height="60%" border-radius="50%"/>
         </div>
        </div>
           
