@@ -1,15 +1,22 @@
 @import "bootstrap";
 
-@import url('https://fonts.googleapis.com/css?family=Pacifico');
-@import url('https://fonts.googleapis.com/css?family=Quicksand');
-@import url('https://fonts.googleapis.com/css?family=Cabin');
+/*******************************
+             Colors
+*******************************/
+// #202A25
+// #C9C0BB
+// #034078
+// #1282A2
+// #FEFCFB
+
 /*******************************
              TYPE
 *******************************/
 
-p, h1, h2, h3, h4, h5, h6 {
+@import url('https://fonts.googleapis.com/css?family=Pacifico');
+@import url('https://fonts.googleapis.com/css?family=Quicksand');
+@import url('https://fonts.googleapis.com/css?family=Cabin');
 
-}
 
 p {
     font-family: 'Quicksand', serif;
@@ -23,7 +30,10 @@ h2, h3, h4, h5{
 
 h1, h6 {
     font-family: 'Pacifico', serif;
-    
+}
+
+.signup_form, .signing_in, .edit_user {
+    font-family: 'Quicksand', serif;
 }
 /*******************************
          LANDING PAGE
@@ -83,12 +93,19 @@ h1, h6 {
 
 .signingin, .signingup, .edit_user, .can_you_help{
     text-align: center;
+    margin-top: 100px;
 }
 
-.login {
-    margin-top: 70px;
- }
- 
  .inbox {
      margin-top: 100px;
+ }
+
+ .signingup, .signingin {
+    color: blue;
+    background:#C9C0BB;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .signup_form {
+    // background: rgb(235, 128, 128);
+    }
  }

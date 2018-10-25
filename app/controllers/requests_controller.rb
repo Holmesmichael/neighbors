@@ -1,6 +1,7 @@
 class RequestsController < ApplicationController
     before_action :set_request, only: [:show, :edit, :update, :destroy]
     respond_to? :json
+    before_action :authenticate_user!
 
     def request_map
         format.json { render :json => @requests.to_json(:only => [:id, :title, :description, :address, :request_type, :done], :methods => [:to_param]) }
