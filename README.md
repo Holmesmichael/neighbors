@@ -25,11 +25,11 @@ Feature that shows how many requests have 5 volunteers or more,  and how many ar
  
 Tech used:
 
-HTML
-CSS
-BootStrap
-React.JS
-Ruby on Rails
-ProgreSQL
-Google Maps API
+HTML  |
+CSS  |
+BootStrap  |
+React.JS  |
+Ruby on Rails  |
+ProgreSQL  |
+Google Maps API  
  
